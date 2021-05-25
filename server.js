@@ -4,14 +4,15 @@
 const express=require('express')//library from js 
 const weatherData=require('./assets/weather.json')
 const server= express();//store all method && properties from express libraray
-//require('dotenv').config(); // npm i dotenv
+require('dotenv').config(); // npm i dotenv
  //const cors = require('cors');
 
 
 
-//const PORT = process.env.PORT;
 
-const PORT=3009 // change  that to In order not to conflict with app react
+
+
+const PORT= process.env.PORT; // change  that to In order not to conflict with app react
 
 //server.use(cors()); //  make my server opened for anyone
 // will start listening to the requst 
