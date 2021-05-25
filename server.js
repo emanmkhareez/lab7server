@@ -5,7 +5,7 @@ const express=require('express')//library from js
 const weatherData=require('./assets/weather.json')
 const server= express();//store all method && properties from express libraray
 require('dotenv').config(); // npm i dotenv
- //const cors = require('cors');
+ const cors = require('cors');
 
 
 
@@ -14,7 +14,7 @@ require('dotenv').config(); // npm i dotenv
 
 const PORT= process.env.PORT; // change  that to In order not to conflict with app react
 
-//server.use(cors()); //  make my server opened for anyone
+server.use(cors()); //  make my server opened for anyone
 // will start listening to the requst 
 
 
@@ -34,8 +34,9 @@ server.get('/weather', (req, res) => {
 
         console.log(item.city_name);
 
-            return item.city_name
+            return  array
     })
+    res.send(array)
     
 })
 
@@ -67,24 +68,26 @@ server.get('/weather', (req, res) => {
 server.get('*',(req,res)=>{
     res.status(404).send('not found');
 })
-// when the sever not process the requst 
-server.get('*',(req,res)=>{
-    res.status(400).send("server cannot or will not process the request");
+// // when the sever not process the requst 
+// server.get('*',(req,res)=>{
+//     res.status(400).send("server cannot or will not process the request");
 
 
-})
+// })
 
-//the server encountered an unexpected condition that prevented it from fulfilling the request
-server.get('*',(req,res)=>{
-    res.status(500).send("the server encountered an unexpected condition that prevented it from fulfilling the request");
+// //the server encountered an unexpected condition that prevented it from fulfilling the request
+// server.get('*',(req,res)=>{
+//     res.status(500).send("the server encountered an unexpected condition that prevented it from fulfilling the request");
 
 
-})
+// })
 
 
 let  array=[];
 var today = new Date();
   var day = today.getDate();
+
+
 server.listen(PORT,()=>{    
     console.log(`listen on the port ${PORT}`);
 })
@@ -102,8 +105,8 @@ class  ForCast
   
     
 }
-let Amman=new ForCast(["Amman",35.91,31.95],day)
-let Paris=new ForCast (["Paris",2.35,48.86],day)
-let Seattle=new ForCast(["Seattle",-122.33207,47.60621],day)
+let Amman=new ForCast("Amman 35.91 31.95" ,day)
+let Paris=new ForCast ("Paris 2.35 48.86",day)
+let Seattle=new ForCast("Seattle -122.33207 47.60621",day)
 
 console.log(array);
