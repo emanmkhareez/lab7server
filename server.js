@@ -105,8 +105,8 @@ class  ForCast
   
     
 }
-let Amman=new ForCast("Amman 35.91 31.95" ,day)
-let Paris=new ForCast ("Paris 2.35 48.86",day)
-let Seattle=new ForCast("Seattle -122.33207 47.60621",day)
+let Amman=new ForCast("moonrise_ts: 1616530626   wind_cdir: SSW    pres: 1024.8334   " ,day)
+let Paris=new ForCast (" moonrise_ts:  1616530626   wind_cdir: SSW    pres: 1024.8334   ",day)
+let Seattle=new ForCast("  moonrise_ts:1618820363    wind_cdir: SSE pres: 1011.86 " ,day)
 
 console.log(array);
