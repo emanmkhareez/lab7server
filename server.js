@@ -5,16 +5,16 @@ const express =require('express')//npm i express
 
 const DataWeather=require('./assets/weather.json')
 
+const cors = require('cors');
 //cros :origin recource sharing
 //to give premission for who can sendme requst
  
-// const cors=require('cors')npm i cors
-
-// server.use(cors());  make it open to any client
 
 // variable to store all method and proprites from express
 
 let server=express()
+
+server.use(cors());
 
 require('dotenv').config(); // npm i dotenv
 
