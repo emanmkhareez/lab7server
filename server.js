@@ -33,6 +33,20 @@ server.get('/test',(req,res)=>{
 
 
 
+let array=[]
+// create class 
+class Forecast {
+    constructor(description,date){
+        this.description=description
+        this.date=date
+
+    
+        array.push(this);
+    }
+
+}
+
+
 // http:localhost:3008/weather?cityName=Seattle&lon=-122.33207&lat=47.60621
 server.get('/weather',(req,res)=>{
     console.log(req.query)
@@ -73,16 +87,3 @@ server.get('*',(req,res)=>{
 
 
 
-
-let array=[]
-// create class 
-class Forecast {
-    constructor(description,date){
-        this.description=description
-        this.date=date
-
-    
-        array.push(this);
-    }
-
-}
