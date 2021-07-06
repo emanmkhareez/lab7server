@@ -47,14 +47,14 @@ class Forecast {
 }
 
 
-// http:localhost:3008/weather?cityName=Seattle&lon=-122.33207&lat=47.60621
+// http:localhost:3008/weather?cityName=Seattle
 server.get('/weather',(req,res)=>{
     console.log(req.query)
 let cityName=req.query.cityName
 let lon=req.query.lon
 let lat=req.query.lat
 let selectData=DataWeather.find((item)=>{
-    if(item.city_name==cityName && item.lon==lon && item.lat==lat )
+    if(item.city_name == cityName  )
     {
 
  
@@ -62,7 +62,7 @@ let selectData=DataWeather.find((item)=>{
 
     }
 })
-    
+    try{
 for(let i=0;i<selectData.data.length;i++){
     new Forecast(selectData.data[i].weather.description,selectData.data[i].valid_date)
 
@@ -73,15 +73,21 @@ for(let i=0;i<selectData.data.length;i++){
 
 // console.log( array);
 res.status(200).send( array)
+    }
+    catch{
+        res.send('data not found ');
+
+    }
 
 })
+
 
 
 
 // handel any error
 
 server.get('*',(req,res)=>{
-    res.status(404).send('the city not found')
+    res.status(500).send('the city not found')
 })
 
 
