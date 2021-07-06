@@ -1,112 +1,88 @@
 'use strict'
 
 
-const express=require('express')//library from js 
-const weatherData=require('./assets/weather.json')
-const server= express();//store all method && properties from express libraray
+const express =require('express')//npm i express
+
+const DataWeather=require('./assets/weather.json')
+
+//cros :origin recource sharing
+//to give premission for who can sendme requst
+ 
+// const cors=require('cors')npm i cors
+
+// server.use(cors());  make it open to any client
+
+// variable to store all method and proprites from express
+
+let server=express()
+
 require('dotenv').config(); // npm i dotenv
- const cors = require('cors');
+
+ // to solve conflict between react app and express server 
+const PORT =process.env.PORT
+// to recive requst 
+
+server.listen(PORT,()=>{
+    console.log(`listen on port ${PORT}`)
+})
+//http:localhost:3008/test
+server.get('/test',(req,res)=>{
+    res.send('my server is work')
+})
 
 
 
 
-
-
-const PORT= process.env.PORT; // change  that to In order not to conflict with app react
-
-server.use(cors()); //  make my server opened for anyone
-// will start listening to the requst 
-
-
-console.log(weatherData);
-// http://localhost:3009/weather?cityName=Seattle&lon=-122.33207&lat=47.60621
-server.get('/weather', (req, res) => {
+// http:localhost:3008/weather?cityName=Seattle&lon=-122.33207&lat=47.60621
+server.get('/weather',(req,res)=>{
     console.log(req.query)
-   
-    let city= req.query.cityName
-   let lon=req.query.lon
-   let lat=req.query.lat
+let cityName=req.query.cityName
+let lon=req.query.lon
+let lat=req.query.lat
+let selectData=DataWeather.find((item)=>{
+    if(item.city_name==cityName && item.lon==lon && item.lat==lat )
+    {
 
-    let  city_names= weatherData.find(item => {
-       
+ 
+    return item
 
-        if (item.city_name==city && item.lon==lon && item.lat==lat  )
-
-        console.log(item.city_name);
-
-            return  array
-    })
-    res.send(array)
+    }
+})
     
-})
+for(let i=0;i<selectData.data.length;i++){
+    new Forecast(selectData.data[i].weather.description,selectData.data[i].valid_date)
 
 
-// / // http://localhost:3009/weather
-//  server.get('/weather',(req,res)=>{
-//      console.log(weather);
-//      let pokeNames = weatherData.data.map(item=>{
-//     return item.city_name;
-//     })
-//    res.send(pokeNames)
-//  })
-
-
-// // http://localhost:3001/
-// server.get('/',(req,res)=>{
-//     res.send('hallo  rout')
-
-// })
-// // http://localhost:3001/test
-
-// //this respons to  requsrt http://localhost:3001/test
-// server.get('/test',(req,res)=>{
-//     res.send('test file')
-
-// })
-
-//when recived req not found
-server.get('*',(req,res)=>{
-    res.status(404).send('not found');
-})
-// // when the sever not process the requst 
-// server.get('*',(req,res)=>{
-//     res.status(400).send("server cannot or will not process the request");
-
-
-// })
-
-// //the server encountered an unexpected condition that prevented it from fulfilling the request
-// server.get('*',(req,res)=>{
-//     res.status(500).send("the server encountered an unexpected condition that prevented it from fulfilling the request");
-
-
-// })
-
-
-let  array=[];
-var today = new Date();
-  var day = today.getDate();
-
-
-server.listen(PORT,()=>{    
-    console.log(`listen on the port ${PORT}`);
-})
-
-class  ForCast
-{
-    constructor(description,date){
-    this.date=date
-    this.description=description
-
-    array.push(this);
-};
-
-   
-  
-    
 }
-let Amman=new ForCast("moonrise_ts: 1616530626   wind_cdir: SSW    pres: 1024.8334   " ,day)
-let Paris=new ForCast (" moonrise_ts:  1616530626   wind_cdir: SSW    pres: 1024.8334   ",day)
-let Seattle=new ForCast("  moonrise_ts:1618820363    wind_cdir: SSE pres: 1011.86 " ,day)
 
-console.log(array);
+
+
+// console.log( array);
+res.status(200).send( array)
+
+})
+
+
+
+// handel any error
+
+server.get('*',(req,res)=>{
+    res.status(404).send('the city not found')
+})
+
+
+
+
+
+let array=[]
+// create class 
+class Forecast {
+    constructor(description,date){
+        this.description=description
+        this.date=date
+
+    
+        array.push(this);
+    }
+
+}
