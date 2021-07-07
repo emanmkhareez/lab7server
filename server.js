@@ -53,17 +53,19 @@ class Forecast {
     }
 
 }
+let Moviesarray=[]
 //movies class
 class Movies {
     constructor(item){
        this.title=item.title;
        this.overview=item.overview;
-       this.average_votes=item.average_votes;
-       this.image_url=item.image_url;
-       this.total_votes=item.total_votes;
+       this.average_votes=item.vote_average;
+       this.image_url=`https://image.tmdb.org/t/p/w500/${item.poster_path}`
+       this.total_votes=item.vote_count;
        this.image_url=item.image_url;
        this.popularity=item.popularity;
-       this.released_on=item.released_on;
+       this.released_on=item.release_date;
+       Moviesarray.push(this)
     }
 }
 
@@ -102,7 +104,7 @@ server.get('/movies',(req,res)=>{
           return new Movies (item)   })
       
           
-          res.send(moviesResult)  })
+          res.send(Moviesarray)  })
 
           .catch(error=>{
             res.send(`No weather data for this City ${error}`);
