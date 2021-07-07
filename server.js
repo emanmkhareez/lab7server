@@ -6,6 +6,7 @@ const express =require('express')//npm i express
 const DataWeather=require('./assets/weather.json')
 
 const cors = require('cors');
+const axios=require('axios')
 //cros :origin recource sharing
 //to give premission for who can sendme requst
  
@@ -26,9 +27,12 @@ server.listen(PORT,()=>{
     console.log(`listen on port ${PORT}`)
 })
 //http:localhost:3008/test
-server.get('/test',(req,res)=>{
+server.get('/test', async(req,res)=>{
     res.send('my server is work')
 })
+
+
+
 
 
 
