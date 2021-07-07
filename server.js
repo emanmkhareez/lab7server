@@ -35,8 +35,6 @@ server.get('/test', async(req,res)=>{
 
 
 
-
-
 let array=[]
 // create class 
 class Forecast {
