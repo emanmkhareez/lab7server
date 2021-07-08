@@ -15,7 +15,7 @@ async function handlerWeather(req, res) {
     let lat=req.query.lat
 
     let selectData = {}
-    let weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${searchQuery}&key=${process.env.WEATHER_API_KEY}&days=5&lon=${lon}&lat=${lat}`
+    let weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${searchQuery}&key=${process.env.WEATHER_API_KEY}&days=1&lon=${lon}&lat=${lat}`
     axios
         .get(weatherUrl)
         .then(wheatherinfo => {
