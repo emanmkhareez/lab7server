@@ -7,27 +7,35 @@ const axios = require('axios')
 module.exports= handlrMovies;
 
 let moviesResult = []
-
+let memoryData={};
 async function handlrMovies(req, res) {
     let city_name = req.query.city
     let urlMovies = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${city_name}`
-
+if (memoryData[city_name]!==undefined){
+    console.log('retrieve the data from our API')
+    res.send(memoryData[city_name])
+}
+else{
     axios
         .get(urlMovies)
         .then(moviesArr => {
+            console.log('data from API')
+            memoryData[city_name]= moviesArr.data.results
+           
             moviesResult = moviesArr.data.results.map(item => {
+              
                 return new Movie(item)
             })
-
-
+  
+             
             res.send(moviesResult)
         })
-
+    
         .catch(error => {
             res.send(`No weather data for this City ${error}`);
         })
 
-
+    }
 }
 
 
