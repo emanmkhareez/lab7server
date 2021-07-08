@@ -33,11 +33,11 @@ server.get('/test', async (req, res) => {
 
 
 //import handle
-const handlrMovies=require('./modules/movies.js')
-const handlerWeather=require('./modules/weather')
+const handlrMovies = require('./modules/movies.js')
+const handlerWeather = require('./modules/weather')
 
 
-// lab 8
+// lab 9
 
 //Routs
 server.get('/weather', handlerWeather)
