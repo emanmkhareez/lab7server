@@ -52,11 +52,11 @@ class Forecast {
 // http:localhost:3008/weather?cityName=Seattle
 server.get('/weather',(req,res)=>{
     console.log(req.query)
-let cityName=req.query.cityName
+let searchQuery=req.query.cityName
 let lon=req.query.lon
 let lat=req.query.lat
 let selectData=DataWeather.find((item)=>{
-    if(item.city_name == cityName  )
+    if(item.city_name == searchQuery  )
     {
 
  
